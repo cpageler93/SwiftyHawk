@@ -50,4 +50,44 @@ class HawkCryptoTests: XCTestCase {
                                                           ext: "this is some app data")
         XCTAssertEqual(string, "hawk.1.header\n1357747017\nk3k4j5\nGET\n/resource/something\nexample.com\n8080\nU4MKKSmiVxk37JCCrAVIjV/OhB3y+NdwoCr6RShbVkE=\nthis is some app data\n")
     }
+    
+    func testCalculatePayloadHashShouldReturnAValidHash() {
+        
+        guard let hash = try? Hawk.Crypto.calculatePayloadHash(payload: "{\"type\":\"https://tent.io/types/status/v0#\"}",
+                                                               algorith: .sha256,
+                                                               contentType: "application/vnd.tent.post.v0+json")
+        else {
+            XCTFail("Failed to calculate payload")
+            return
+        }
+                
+        XCTAssertEqual(hash, "neQFHgYKl/jFqDINrC21uLS0gkFglTz789rzcSr7HYU=")
+        
+    }
+    
+    func testCalculateMacShouldReturnAValidMac() {
+        let credentials = Hawk.Credentials(id: "exqbZWtykFZIh2D7cXi9dA", key: "HX9QcbD-r3ItFEnRcAuOSg", algoritm: .sha256)
+        guard let hash = try? Hawk.Crypto.calculatePayloadHash(payload: "{\"type\":\"https://tent.io/types/status/v0#\"}",
+                                                               algorith: .sha256,
+                                                               contentType: "application/vnd.tent.post.v0+json")
+        else {
+            XCTFail("failed to calculate hash")
+            return
+        }
+        guard let mac = try? Hawk.Crypto.calculateMac(type: "header",
+                                                      credentials: credentials,
+                                                      resource: "/posts",
+                                                      timestamp: 1368996800,
+                                                      nonce: "3yuYCD4Z",
+                                                      method: "POST",
+                                                      host: "example.com",
+                                                      port: 443,
+                                                      hash: hash)
+        else {
+            XCTFail("Failed to calculate Mac")
+            return
+        }
+        
+        XCTAssertEqual(mac, "2sttHCQJG9ejj1x7eCi35FP23Miu9VtlaUgwk68DTpM=")
+    }
 }
