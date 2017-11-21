@@ -83,7 +83,7 @@ extension Hawk {
             return normalized;
         }
         
-        public static func calculatePayloadHash(payload: String?, algorith: Algoritm, contentType: String) throws -> String? {
+        public static func calculatePayloadHash(payload: String?, algorith: Algoritm, contentType: String? = nil) throws -> String? {
             var payloadToHash = "hawk.\(headerVersion).payload\n"
             payloadToHash.append("\(Utils.parseContentType(contentType))\n")
             payloadToHash.append((payload ?? ""))

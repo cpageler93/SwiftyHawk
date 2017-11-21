@@ -51,6 +51,7 @@ class HawkCryptoTests: XCTestCase {
         XCTAssertEqual(string, "hawk.1.header\n1357747017\nk3k4j5\nGET\n/resource/something\nexample.com\n8080\nU4MKKSmiVxk37JCCrAVIjV/OhB3y+NdwoCr6RShbVkE=\nthis is some app data\n")
     }
     
+    /// https://github.com/tent/hawk-objc/blob/master/HawkTests/HawkTests.m#L42
     func testCalculatePayloadHashShouldReturnAValidHash() {
         
         guard let hash = try? Hawk.Crypto.calculatePayloadHash(payload: "{\"type\":\"https://tent.io/types/status/v0#\"}",
@@ -65,6 +66,7 @@ class HawkCryptoTests: XCTestCase {
         
     }
     
+    /// https://github.com/tent/hawk-objc/blob/master/HawkTests/HawkTests.m#L51
     func testCalculateMacShouldReturnAValidMac() {
         let credentials = Hawk.Credentials(id: "exqbZWtykFZIh2D7cXi9dA", key: "HX9QcbD-r3ItFEnRcAuOSg", algoritm: .sha256)
         guard let hash = try? Hawk.Crypto.calculatePayloadHash(payload: "{\"type\":\"https://tent.io/types/status/v0#\"}",
@@ -82,7 +84,8 @@ class HawkCryptoTests: XCTestCase {
                                                       method: "POST",
                                                       host: "example.com",
                                                       port: 443,
-                                                      hash: hash)
+                                                      hash: hash,
+                                                      app: "wn6yzHGe5TLaT-fvOPbAyQ")
         else {
             XCTFail("Failed to calculate Mac")
             return

@@ -12,8 +12,8 @@ extension Hawk {
     
     public class Utils {
         
-        public static func parseContentType(_ contentType: String) -> String {
-            return contentType.split(separator: ";").first?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ?? ""
+        public static func parseContentType(_ contentType: String?) -> String {
+            return contentType?.split(separator: ";").first?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ?? ""
         }
         
     }
