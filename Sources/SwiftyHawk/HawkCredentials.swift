@@ -16,6 +16,12 @@ public extension Hawk {
         public var key: String
         public var algoritm: Algoritm
         
+        public init(id: String, key: String, algoritm: Algoritm) {
+            self.id = id
+            self.key = key
+            self.algoritm = algoritm
+        }
+        
     }
     
 }
