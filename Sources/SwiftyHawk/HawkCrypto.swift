@@ -9,7 +9,7 @@ import Foundation
 import CryptoSwift
 
 
-extension Hawk {
+public extension Hawk {
     
     public class Crypto {
         

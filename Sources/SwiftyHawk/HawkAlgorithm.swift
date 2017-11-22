@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension Hawk {
+public extension Hawk {
     
     public enum Algoritm {
         case sha1

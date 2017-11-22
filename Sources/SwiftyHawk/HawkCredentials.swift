@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension Hawk {
+public extension Hawk {
     
     public struct Credentials {
         
