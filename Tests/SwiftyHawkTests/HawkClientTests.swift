@@ -90,5 +90,24 @@ class HawkClientTests: XCTestCase {
         
         XCTAssertEqual(headerResult?.headerValue, "Hawk id=\"exqbZWtykFZIh2D7cXi9dA\", ts=\"1368996800\", nonce=\"3yuYCD4Z\", hash=\"neQFHgYKl/jFqDINrC21uLS0gkFglTz789rzcSr7HYU=\", mac=\"2sttHCQJG9ejj1x7eCi35FP23Miu9VtlaUgwk68DTpM=\", app=\"wn6yzHGe5TLaT-fvOPbAyQ\"")
     }
+
+    func testGetRequestWithURLParametersShouldReturnValidAuthorizationHeader() {
+        let credentials = Hawk.Credentials(id: "dh37fgj492je",
+                                           key: "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn",
+                                           algoritm: .sha256)
+
+        guard let headerResult = try? Hawk.Client.header(uri: "http://example.com:8000/resource/1?b=1&a=2",
+                                                         method: "GET",
+                                                         credentials: credentials,
+                                                         timestamp: 1353832234,
+                                                         nonce: "j4h3g2",
+                                                         ext: "some-app-ext-data")
+        else {
+            XCTFail("Failed to create header")
+            return
+        }
+
+        XCTAssertEqual(headerResult?.headerValue, "Hawk id=\"dh37fgj492je\", ts=\"1353832234\", nonce=\"j4h3g2\", ext=\"some-app-ext-data\", mac=\"6R4rV5iE+NPoym+WwjeHzjAGXUtLNIxmo1vpMofpLAE=\"")
+    }
     
 }
