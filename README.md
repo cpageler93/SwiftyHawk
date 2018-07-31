@@ -36,7 +36,7 @@ let package = Package(
         .library(name: "Dependencies", targets: ["Dependencies"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/cpageler93/SwiftyHawk", from: "0.1.3")
+        .package(url: "https://github.com/cpageler93/SwiftyHawk", from: "0.1.4")
     ],
     targets: [
         .target(name: "Dependencies", dependencies: ["SwiftyHawk"])
