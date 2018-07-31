@@ -56,7 +56,10 @@ public extension Hawk {
                 throw Error.couldNotParsePortFromURI
             }
             let timestamp = timestamp ?? Date().timeIntervalSince1970
-            let resource = uri.path + (uri.query ?? "")
+            var resource = uri.path
+            if let query = uri.query {
+                resource += "?\(query)"
+            }
             guard let mac = try Hawk.Crypto.calculateMac(type: "header",
                                                          credentials: credentials,
                                                          resource: resource,
