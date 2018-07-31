@@ -17,7 +17,7 @@ To install `SwiftyHawk` with Carthage, setup Carthage for your project as descri
 Then add this line to your Cartfile:
 
 ```
-github "cpageler93/SwiftyHawk" ~> 0.1.3
+github "cpageler93/SwiftyHawk" ~> 0.1.4
 ```
 
 ### Swift Package Manager
